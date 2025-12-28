@@ -18,7 +18,7 @@ body{
   text-align:center;
 }
 
-/* ================= ŞİFRE ================= */
+/* ===== ŞİFRE ===== */
 #lock{
   position:fixed;
   inset:0;
@@ -47,7 +47,7 @@ body{
   cursor:pointer;
 }
 
-/* ================= ANA ================= */
+/* ===== ANA ===== */
 #content{display:none}
 
 h1{
@@ -70,7 +70,7 @@ h1{
   margin-bottom:25px;
 }
 
-/* ================= SLAYT ================= */
+/* ===== SLAYT ===== */
 .slider{
   max-width:360px;
   margin:20px auto;
@@ -85,7 +85,7 @@ h1{
   display:block;
 }
 
-/* ================= OVERLAY NOT ================= */
+/* ===== OVERLAY NOT ===== */
 #overlay-note{
   position:fixed;
   inset:0;
@@ -101,16 +101,13 @@ h1{
   pointer-events:none;
   transition:opacity 1s ease;
 }
-
 #overlay-note.show{
   opacity:1;
   pointer-events:auto;
 }
-
 #overlay-note.hide{
   opacity:0;
 }
-
 #overlay-note .box{
   max-width:600px;
   background:rgba(255,255,255,0.05);
@@ -121,13 +118,28 @@ h1{
   line-height:1.7;
 }
 
-/* ================= SPOTIFY ================= */
+/* ===== KALP EFEKT ===== */
+.heart-pop{
+  position:fixed;
+  font-size:20px;
+  color:#ff4d6d;
+  animation:pop 1s ease forwards;
+  pointer-events:none;
+}
+
+@keyframes pop{
+  0%{transform:scale(0);opacity:1}
+  50%{transform:scale(1.4);opacity:1}
+  100%{transform:translateY(-60px) scale(0.6);opacity:0}
+}
+
+/* ===== SPOTIFY ===== */
 .spotify{
   max-width:360px;
   margin:30px auto;
 }
 
-/* ================= ALT METİN ================= */
+/* ===== ALT METİN ===== */
 .text{
   max-width:700px;
   margin:30px auto 60px;
@@ -186,7 +198,7 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 </iframe>
 </div>
 
-<!-- ALT YAZI -->
+<!-- ALT METİN -->
 <div class="text">
 Bazı anlar vardır…<br><br>
 Zaman durur, kelimeler eksik kalır ama kalp her şeyi söyler.<br><br>
@@ -208,7 +220,7 @@ function unlock(){
     // göster
     setTimeout(()=>{ note.classList.add("show"); },200);
 
-    // gizle
+    // otomatik gizle
     setTimeout(()=>{
       note.classList.remove("show");
       note.classList.add("hide");
@@ -218,6 +230,24 @@ function unlock(){
     alert("Şifre yanlış 💔");
   }
 }
+
+/* NOTA DOKUNUNCA: KALP + KAPANMA */
+document.getElementById("overlay-note").addEventListener("click",(e)=>{
+  const note = document.getElementById("overlay-note");
+
+  for(let i=0;i<6;i++){
+    const heart=document.createElement("div");
+    heart.className="heart-pop";
+    heart.innerHTML="❤️";
+    heart.style.left=(e.clientX + (Math.random()*60-30))+"px";
+    heart.style.top=(e.clientY + (Math.random()*60-30))+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),1000);
+  }
+
+  note.classList.remove("show");
+  note.classList.add("hide");
+});
 
 /* SLAYT */
 let i=0;
