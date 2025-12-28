@@ -2,110 +2,163 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Rojhat ❤️ Sidar</title>
+<title>Rojhat ❤ Sidar</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+
 body{
   margin:0;
   background:#0f0f0f;
   color:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* === PASSWORD SCREEN === */
+#password-screen{
+  position:fixed;
+  inset:0;
+  background:#0f0f0f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition:opacity .8s ease;
+}
+
+.password-box{
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(12px);
+  border-radius:18px;
+  padding:40px 25px;
+  width:85%;
+  max-width:360px;
+  box-shadow:0 0 40px rgba(0,0,0,.6);
+}
+
+.password-box h2{
+  font-weight:400;
+  letter-spacing:1px;
+  margin-bottom:25px;
+}
+
+.password-box input{
+  width:100%;
+  padding:14px;
+  font-size:16px;
+  border:none;
+  border-radius:10px;
+  outline:none;
   text-align:center;
 }
 
-/* BAŞLIK */
+.password-box button{
+  margin-top:20px;
+  width:100%;
+  padding:14px;
+  font-size:15px;
+  border:none;
+  border-radius:10px;
+  background:#fff;
+  color:#000;
+  cursor:pointer;
+}
+
+/* === MAIN CONTENT === */
+#content{
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+
 h1{
-  margin-top:28px;
-  font-size:34px;
-  letter-spacing:1.5px;
+  margin-top:35px;
+  font-size:32px;
   font-weight:500;
+  letter-spacing:1px;
 }
 
-/* KALP */
-.heart{
-  display:inline-block;
-  margin:0 6px;
-  animation:beat 2s infinite ease-in-out;
-}
-
-@keyframes beat{
-  0%{transform:scale(1);opacity:.9}
-  50%{transform:scale(1.2);opacity:1}
-  100%{transform:scale(1);opacity:.9}
-}
-
-/* TARİH */
 .date{
   color:#aaa;
   font-size:13px;
   margin-top:6px;
 }
 
-/* FOTO */
+/* === OPENING MESSAGE === */
+#opening-message{
+  margin:45px auto;
+  width:90%;
+  max-width:600px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  padding:35px 25px;
+  border-radius:20px;
+  line-height:1.7;
+  font-size:17px;
+  box-shadow:0 0 30px rgba(0,0,0,.5);
+}
+
+/* === IMAGE === */
 .photo{
   width:90%;
   max-width:420px;
-  margin:30px auto;
   border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 20px 50px rgba(0,0,0,.6);
-}
-
-.photo img{
-  width:100%;
+  margin:25px auto;
   display:block;
-}
-
-/* AÇILIŞ MESAJI */
-#opening-message{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.96);
-  color:white;
-  z-index:9999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:30px;
-  font-size:18px;
-  line-height:1.7;
+  box-shadow:0 0 35px rgba(0,0,0,.6);
 }
 </style>
 </head>
 
 <body>
 
-<!-- AÇILIŞ MESAJI -->
-<div id="opening-message">
-  Sidar,<br><br>
-  Bu sayfayı herkes görebilir ama burayı sadece sen açabildin.<br>
-  Çünkü kalbimin en sessiz yeri sana ait.<br><br>
-  Yanımda olsan da olmasan da,<br>
-  ben seni hep buraya sakladım.<br><br>
-  İyi ki varsın…<br>
-  Rojhat ❤️
+<!-- PASSWORD -->
+<div id="password-screen">
+  <div class="password-box">
+    <h2>Bu sayfa sana ait</h2>
+    <input type="password" id="password" placeholder="Şifreyi gir">
+    <button onclick="checkPassword()">Aç</button>
+  </div>
 </div>
 
-<!-- ANA İÇERİK -->
-<h1>Rojhat <span class="heart">❤️</span> Sidar</h1>
+<!-- MAIN -->
+<div id="content">
+
+<h1>Rojhat ❤ Sidar</h1>
 <div class="date">18 / 12 / 2023</div>
 
-<div class="photo">
-  <img src="https://i.imgur.com/rWleCjS.jpeg" alt="">
+<div id="opening-message">
+Sidar,<br><br>
+Bu sayfayı herkes görebilir ama burayı sadece sen açabildin.<br>
+Çünkü kalbimin en sessiz yeri sana ait.<br><br>
+Yanımda olsan da olmasan da,<br>
+ben seni hep buraya sakladım.<br><br>
+İyi ki varsın…<br>
+Rojhat ❤️
 </div>
 
-<div class="photo">
-  <img src="https://i.imgur.com/Ns7egZm.jpeg" alt="">
+<!-- FOTOĞRAF -->
+<img src="1.jpg" class="photo">
+
 </div>
 
-<!-- AÇILIŞ MESAJINI KAPAT -->
 <script>
-setTimeout(() => {
-  const msg = document.getElementById("opening-message");
-  if(msg) msg.style.display = "none";
-}, 6000);
+function checkPassword(){
+  const pass = document.getElementById("password").value;
+  if(pass === "Siroj"){
+    document.getElementById("password-screen").style.opacity = "0";
+    setTimeout(()=>{
+      document.getElementById("password-screen").style.display="none";
+      document.getElementById("content").style.opacity="1";
+    },800);
+  }else{
+    alert("Yanlış şifre");
+  }
+}
 </script>
 
 </body>
