@@ -5,12 +5,6 @@
 <title>Rojhat ❤️ Sidar</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Önizleme kapatma -->
-<meta property="og:title" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="">
-<meta name="twitter:card" content="none">
-
 <style>
 body{
   margin:0;
@@ -20,110 +14,63 @@ body{
   text-align:center;
 }
 
-/* AÇILIŞ MESAJI */
-#opening-message{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  max-width:90%;
-  background:rgba(0,0,0,0.65);
-  color:#fff;
-  padding:18px 22px;
-  border-radius:18px;
-  font-size:15px;
-  line-height:1.6;
-  text-align:center;
-  z-index:9999;
-  opacity:0;
-  animation:fadeMessage 8s ease forwards;
-}
-@keyframes fadeMessage{
-  0%{opacity:0}
-  10%{opacity:1}
-  80%{opacity:1}
-  100%{opacity:0}
-}
-
-/* ŞİFRE EKRANI */
-#lock{
-  position:fixed;
-  inset:0;
-  background:#0f0f0f;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  z-index:10;
-}
-#lock input{
-  padding:12px;
-  font-size:16px;
-  border-radius:10px;
-  border:none;
-  outline:none;
-  margin-top:12px;
-  text-align:center;
-}
-#lock button{
-  margin-top:12px;
-  padding:10px 20px;
-  border-radius:20px;
-  border:none;
-  font-size:15px;
-  cursor:pointer;
-}
-
-/* ANA */
+/* BAŞLIK */
 h1{
-  margin-top:30px;
-  font-size:32px;
+  margin-top:28px;
+  font-size:34px;
+  letter-spacing:1.5px;
   font-weight:500;
 }
+
+/* KALP */
 .heart{
   display:inline-block;
-  animation:beat 2s infinite;
-}
-@keyframes beat{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-  100%{transform:scale(1);}
-}
-.date{
-  color:#aaa;
-  margin-bottom:20px;
-  font-size:14px;
+  margin:0 6px;
+  animation:beat 2s infinite ease-in-out;
 }
 
-/* SLAYT */
-.slider{
-  max-width:360px;
-  margin:20px auto;
+@keyframes beat{
+  0%{transform:scale(1);opacity:.9}
+  50%{transform:scale(1.2);opacity:1}
+  100%{transform:scale(1);opacity:.9}
+}
+
+/* TARİH */
+.date{
+  color:#aaa;
+  font-size:13px;
+  margin-top:6px;
+}
+
+/* FOTO */
+.photo{
+  width:90%;
+  max-width:420px;
+  margin:30px auto;
   border-radius:18px;
   overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
 }
-.slider img{
+
+.photo img{
   width:100%;
-  display:none;
-}
-.slider img.active{
   display:block;
 }
 
-/* METİN */
-.text{
-  max-width:700px;
-  margin:30px auto;
-  padding:0 20px;
-  font-size:17px;
-  line-height:1.6;
-  color:#ddd;
-}
-
-/* SPOTIFY */
-.spotify{
-  max-width:360px;
-  margin:30px auto;
+/* AÇILIŞ MESAJI */
+#opening-message{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.96);
+  color:white;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  font-size:18px;
+  line-height:1.7;
 }
 </style>
 </head>
@@ -141,64 +88,24 @@ h1{
   Rojhat ❤️
 </div>
 
-<!-- ŞİFRE -->
-<div id="lock">
-  <h2>Bu sayfa sana özel 🤍</h2>
-  <p>Şifreyi gir</p>
-  <input type="password" id="pw" placeholder="Şifre">
-  <button onclick="unlock()">Aç</button>
-</div>
-
-<!-- İÇERİK -->
-<div id="content" style="display:none;">
-
+<!-- ANA İÇERİK -->
 <h1>Rojhat <span class="heart">❤️</span> Sidar</h1>
 <div class="date">18 / 12 / 2023</div>
 
-<div class="slider">
-  <img src="https://i.imgur.com/rWleCjS.jpeg" class="active">
-  <img src="https://i.imgur.com/gVi6Xzh.jpeg">
-  <img src="https://i.imgur.com/u4mbVMy.jpeg">
-  <img src="https://i.imgur.com/wl2kagq.jpeg">
-  <img src="https://i.imgur.com/Ns7egZm.jpeg">
+<div class="photo">
+  <img src="https://i.imgur.com/rWleCjS.jpeg" alt="">
 </div>
 
-<div class="spotify">
-<iframe style="border-radius:12px"
-src="https://open.spotify.com/embed/playlist/2XKrcpcdQeBMaXQv6vZLsi"
-width="100%" height="380" frameborder="0"
-allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-</iframe>
+<div class="photo">
+  <img src="https://i.imgur.com/Ns7egZm.jpeg" alt="">
 </div>
 
-<div class="text">
-Bazı anlar vardır…<br><br>
-Zaman durur, kelimeler eksik kalır ama kalp her şeyi söyler.<br><br>
-Bu sayfa bir tesadüf değil.<br>
-Bu şarkılar, bu fotoğraflar, bu tarih…<br><br>
-Hepsi <b>biz</b> olduğumuz için 🤍
-</div>
-
-</div>
-
+<!-- AÇILIŞ MESAJINI KAPAT -->
 <script>
-function unlock(){
-  const pass=document.getElementById("pw").value;
-  if(pass==="Siroj"){
-    document.getElementById("lock").style.display="none";
-    document.getElementById("content").style.display="block";
-  }else{
-    alert("Şifre yanlış 💔");
-  }
-}
-
-let i=0;
-const slides=document.querySelectorAll(".slider img");
-setInterval(()=>{
-  slides[i].classList.remove("active");
-  i=(i+1)%slides.length;
-  slides[i].classList.add("active");
-},4000);
+setTimeout(() => {
+  const msg = document.getElementById("opening-message");
+  if(msg) msg.style.display = "none";
+}, 6000);
 </script>
 
 </body>
