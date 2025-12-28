@@ -6,15 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+
 body{
   margin:0;
   background:#0f0f0f;
   color:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
   text-align:center;
 }
 
-/* ŞİFRE EKRANI */
+/* ================= ŞİFRE ================= */
 #lock{
   position:fixed;
   inset:0;
@@ -23,27 +27,29 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  z-index:10;
+  z-index:9999;
 }
 #lock input{
-  padding:12px;
+  padding:14px;
   font-size:16px;
-  border-radius:10px;
+  border-radius:12px;
   border:none;
   outline:none;
   margin-top:12px;
   text-align:center;
 }
 #lock button{
-  margin-top:12px;
-  padding:10px 20px;
+  margin-top:14px;
+  padding:10px 26px;
   border-radius:20px;
   border:none;
   font-size:15px;
   cursor:pointer;
 }
 
-/* ANA SAYFA */
+/* ================= ANA ================= */
+#content{display:none}
+
 h1{
   margin-top:30px;
   font-size:32px;
@@ -54,17 +60,17 @@ h1{
   animation:beat 2s infinite;
 }
 @keyframes beat{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-  100%{transform:scale(1);}
+  0%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+  100%{transform:scale(1)}
 }
 .date{
   color:#aaa;
-  margin-bottom:20px;
   font-size:14px;
+  margin-bottom:25px;
 }
 
-/* SLAYT */
+/* ================= SLAYT ================= */
 .slider{
   max-width:360px;
   margin:20px auto;
@@ -79,20 +85,44 @@ h1{
   display:block;
 }
 
-/* MESAJ */
+/* ================= NOT ================= */
+.note{
+  max-width:650px;
+  margin:40px auto;
+  padding:30px 25px;
+  background:rgba(255,255,255,0.05);
+  border-radius:20px;
+  font-size:17px;
+  line-height:1.7;
+  color:#eee;
+
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity 1s ease, transform 1s ease;
+}
+.note.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.note.hide{
+  opacity:0;
+  transform:translateY(-10px);
+}
+
+/* ================= SPOTIFY ================= */
+.spotify{
+  max-width:360px;
+  margin:30px auto;
+}
+
+/* ================= ALT METİN ================= */
 .text{
   max-width:700px;
-  margin:30px auto;
+  margin:30px auto 60px;
   padding:0 20px;
   font-size:17px;
   line-height:1.6;
   color:#ddd;
-}
-
-/* SPOTIFY */
-.spotify{
-  max-width:360px;
-  margin:30px auto;
 }
 </style>
 </head>
@@ -108,12 +138,12 @@ h1{
 </div>
 
 <!-- İÇERİK -->
-<div id="content" style="display:none;">
+<div id="content">
 
 <h1>Rojhat <span class="heart">❤️</span> Sidar</h1>
 <div class="date">18 / 12 / 2023</div>
 
-<!-- SLAYT FOTOĞRAFLAR -->
+<!-- SLAYT -->
 <div class="slider">
   <img src="https://i.imgur.com/rWleCjS.jpeg" class="active">
   <img src="https://i.imgur.com/gVi6Xzh.jpeg">
@@ -122,22 +152,33 @@ h1{
   <img src="https://i.imgur.com/Ns7egZm.jpeg">
 </div>
 
+<!-- NOT -->
+<div class="note" id="loveNote">
+Sidar,<br><br>
+Bu sayfayı herkes görebilir ama burayı sadece sen açabildin.<br>
+Çünkü kalbimin en sessiz yeri sana ait.<br><br>
+Yanımda olsan da olmasan da,<br>
+ben seni hep buraya sakladım.<br><br>
+İyi ki varsın…<br>
+Rojhat ❤️
+</div>
+
 <!-- SPOTIFY -->
 <div class="spotify">
 <iframe style="border-radius:12px"
-src="https://open.spotify.com/embed/playlist/2XKrcpcdQeBMaXQv6vZLsi?utm_source=generator"
+src="https://open.spotify.com/embed/playlist/2XKrcpcdQeBMaXQv6vZLsi"
 width="100%" height="380" frameborder="0"
 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
 </iframe>
 </div>
 
-<!-- GİZLİ MESAJ -->
+<!-- ALT YAZI -->
 <div class="text">
 Bazı anlar vardır…<br><br>
 Zaman durur, kelimeler eksik kalır ama kalp her şeyi söyler.<br><br>
 Bu sayfa bir tesadüf değil.<br>
 Bu şarkılar, bu fotoğraflar, bu tarih…<br><br>
-Hepsi **biz** olduğumuz için 🤍
+Hepsi <b>biz</b> olduğumuz için 🤍
 </div>
 
 </div>
@@ -145,10 +186,21 @@ Hepsi **biz** olduğumuz için 🤍
 <script>
 /* ŞİFRE */
 function unlock(){
-  const pass = document.getElementById("pw").value;
-  if(pass === "Siroj"){
+  if(document.getElementById("pw").value === "Siroj"){
     document.getElementById("lock").style.display="none";
     document.getElementById("content").style.display="block";
+
+    const note = document.getElementById("loveNote");
+
+    // fade in
+    setTimeout(()=>{ note.classList.add("show"); },300);
+
+    // fade out
+    setTimeout(()=>{
+      note.classList.remove("show");
+      note.classList.add("hide");
+    },5300);
+
   }else{
     alert("Şifre yanlış 💔");
   }
